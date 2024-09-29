@@ -6,4 +6,94 @@
 body{
     font-family: 'Montserrat', sans-serif;
     margin: 0;   
+    color:#23BDFC;
 }
+
+nav{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 1em;
+    padding-bottom: .85em;
+    padding-left: 3em;
+    padding-right: 3em;
+   
+
+    background-color: #F9F7F7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+nav div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav div.logo img.logo{
+    margin-right: 2.5em;
+}
+
+nav div.logo form div.input-group{
+    border: solid 2px #23BDFC;
+    border-radius: 2.5em;
+    padding: .25em;
+    width: 22em;
+
+    justify-content: flex-start;
+
+
+}
+nav div.logo form div.input-group img{
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-top: .15em;
+    margin-bottom: .15em;
+
+    width: 30px;
+
+}
+
+nav div.logo form div.input-group input{
+    margin: 0em;
+    border: none;
+    background: none;
+    width: 75%;
+}
+nav div.logo form div.input-group input::after{
+    margin: 0em;
+    border: none;
+    background: none;
+}
+nav div.logo form div.input-group input:focus{
+    margin: 0em;
+    border: none;
+    background: none;
+    outline: none;
+    box-shadow: none;
+}
+nav div.logo form div.input-group input:active{
+    margin: 0em;
+    border: none;
+    background: none;
+}
+nav div.logo form div.input-group input::placeholder{
+    color: #353535;
+    opacity: 0.35;
+}
+
+
+nav div.c-city h3{
+    font-weight: 300;
+    margin-right: 1em;
+
+}
+nav div.c-city h3 span{
+    font-weight: 600;
+}
+nav div.c-city img{
+    width: 30px;
+    cursor: pointer;
+}
+

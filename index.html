@@ -9,19 +9,24 @@
   <body>
     <!-- Navigation -->
     <nav>
-      <div>
-        <img
-          src="assets/images/Logo-plain.png"
-          alt="The main logo"
-          width="150px"
-        />
+      <div class="logo">
+        <a href="#">
+          <img
+            class="logo"
+            src="assets/images/Logo-plain.png"
+            alt="The main logo"
+            width="150px"
+        /></a>
 
         <form action="">
-          <input type="search" placeholder="Search City" />
+          <div class="input-group">
+            <img src="assets/icons/search.svg" alt="search" />
+            <input type="search" placeholder="Search City" />
+          </div>
         </form>
       </div>
 
-      <div>
+      <div class="c-city">
         <h3>Current City: <span id="city">Ndola</span></h3>
         <img src="assets/icons/info.svg" alt="" width="50px" />
       </div>
