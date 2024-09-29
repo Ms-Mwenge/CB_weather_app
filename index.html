@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CB Weather App</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div>
+        <img
+          src="assets/images/Logo-plain.png"
+          alt="The main logo"
+          width="150px"
+        />
+
+        <form action="">
+          <input type="search" placeholder="Search City" />
+        </form>
+      </div>
+
+      <div>
+        <h3>Current City: <span id="city">Ndola</span></h3>
+        <img src="assets/icons/info.svg" alt="" width="50px" />
+      </div>
+    </nav>
+
+    <!-- Main  -->
+    <main>
+      <section>
+        <!-- Todays Weather -->
+        <aside>
+          <div>
+
+            <!-- temperature -->
+            <h2>30<sup>o</sup></h2>
+            <div>
+              <!-- humidity level -->
+              <div>
+                <img src="assets/icons/humidity.svg" alt="Humidity levels" />
+                <p>78%</p>
+              </div>
+
+              <!-- Wind speed -->
+              <div>
+                <img src="assets/icons/wind.svg" alt="Wind speed" />
+                <p>6.2 mph</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- current weather condition -->
+          <div>
+            <img src="assets/icons/sunny.svg" alt="sunny" />
+            <h3>Sunny</h3>
+          </div>
+        </aside>
+
+        <!-- Weather focast section -->
+        <aside>
+          <!-- Day 1 -->
+          <div>
+            <h3>Today</h3>
+            <h2>30<sup>o</sup></h2>
+            <p>Sunny</p>
+            <img src="assets/icons/sunny.svg" alt="sunny" />
+          </div>
+
+          <!--Day 2-->
+          <div>
+            <h3>SUN</h3>
+            <h2>20<sup>o</sup></h2>
+            <p>Partly Cloudy</p>
+            <img src="assets/icons/Partly_cloudy.svg" alt="partly cloudy" />
+          </div>
+
+          <!-- Day 3 -->
+          <div>
+            <h3>Day</h3>
+            <h2>05<sup>o</sup></h2>
+            <p>Rainy</p>
+            <img src="assets/icons/rainy.svg" alt="rainy" />
+          </div>
+
+          <!-- Day 4 -->
+          <div>
+            <h3>Day</h3>
+            <h2>30<sup>o</sup></h2>
+            <p>Sunny</p>
+            <img src="assets/icons/sunny.svg" alt="sunny" />
+          </div>
+
+          <!-- Day 5 -->
+          <div>
+            <h3>Day</h3>
+            <h2>17<sup>o</sup></h2>
+            <p>Windy</p>
+            <img src="assets/icons/windy.svg" alt="" />
+          </div>
+        </aside>
+      </section>
+
+      <!-- Detailed Side pane for today's weather -->
+      <section>
+        <aside class="top">
+          <!-- greetings -->
+          <p>Good Morning</p>
+
+          <!-- Time -->
+          <h2>11: 00 AM</h2>
+
+          <!-- Date -->
+          <h3>Saturday</h3>
+          <p>Sep 9, 2024</p>
+
+          <!-- location -->
+          <p>Ndola</p>
+        </aside>
+
+        <aside class="weather-details">
+          <!-- Humidity -->
+          <div>
+            <p>humidity</p>
+            <div>
+              <p>78%</p>
+              <p>icon</p>
+            </div>
+          </div>
+
+          <!-- Wind Speed-->
+          <div>
+            <p>Wind Speed</p>
+            <div>
+              <p>6.2 mph</p>
+              <p>icon</p>
+            </div>
+          </div>
+
+          <!-- Temperature-->
+          <div>
+            <p>Wind Speed</p>
+            <div>
+              <p>30</p>
+              <p>icon</p>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Weather Data Source Credit -->
+        <p>Source: OpenWeatherMap API</p>
+      </section>
+    </main>
+  </body>
+</html>
