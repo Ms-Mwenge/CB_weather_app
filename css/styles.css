@@ -5,7 +5,7 @@
 main {
     position: relative;
     width: 100%;
-    height: 100vh; 
+    height: 97.5vh; 
     background-size: cover;
     background-position: center;
     color: white;
@@ -50,8 +50,8 @@ main {
 
 .loader {
     margin-top: 15em;
-    border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #23BDFC; /* Blue */
+    border: 5px solid #f3f3f3; 
+    border-top: 5px solid #23BDFC; 
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -70,6 +70,7 @@ body{
     margin: 0;   
     background-color: rgb(232, 249, 255);
 }
+
 
 nav{
     
@@ -259,9 +260,8 @@ aside.forecast h4{
 aside.forecast .forecast-items-container{
    
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1em;
+    overflow: auto;
     padding: 1em;
 }
 
@@ -270,6 +270,7 @@ aside.forecast .forecast-items-container{
     text-align: center;
     border-radius: 1em;
     width: 8em;
+    margin-right: 1em;
     padding: .25em;
 }
 .forecast-item .forecast-item-img{
@@ -301,3 +302,91 @@ section.error-message p{
   margin: .25em;
 }
 
+
+/* mobile responsiveness for phones */
+@media (max-width: 767.98px) {
+   nav{
+        margin: 0em;
+        padding:1.5em;
+        justify-content: flex-start;
+   }
+   nav div.logo{
+        display: block;
+    }
+   nav div.logo img.logo{
+        margin-right: 2.5em;
+        margin-bottom: 1em;
+        width: 150px;
+    }
+    nav div.logo form div.input-group{
+        border: solid 2px #23BDFC;
+        border-radius: 2.5em;
+        padding: .25em;
+        width: 18em;
+    
+        justify-content: flex-start;
+    
+    
+    }
+   .data-source{
+         display: none;
+   }
+
+   section.weather-info aside.today-weather div.weather-summary-container h1{
+        text-align: center;
+        margin-top: .2em;
+        margin-bottom:0em;
+        font-size: 6.5rem;
+        letter-spacing: .01rem;
+    }
+
+    div.condition-info{
+        margin: 0em 1em;
+        
+    }
+
+    hr {
+        border: none;
+        height: 1px;
+        background-color: #ADD8E6;
+        width: 60vw;
+    }
+    aside.forecast{
+        margin-top: 3em;
+    }
+
+    aside.forecast .forecast-items-container{
+      display: flex;
+      overflow-x: scroll;
+      justify-content: flex-start;
+
+
+      
+    }
+    aside.forecast .forecast-items-container::-webkit-scrollbar {
+        width: 3px;
+        height: 2px;
+    }
+    
+    aside.forecast .forecast-items-container::-webkit-scrollbar-thumb {
+        background-color: #23BDFC;
+        border-radius: 10px;
+    }
+    
+    aside.forecast .forecast-items-container::-webkit-scrollbar-track {
+        background-color: rgba(35, 189, 252, 0.13);
+        border-radius: 10px;
+    }
+
+    .forecast-item{
+     margin-right: 1em;
+     width: 18em;
+     padding: 1em 2em;
+    }
+    .forecast-item p{
+        margin:0em;
+        font-size: .85rem;
+    }
+    
+  }
+  
