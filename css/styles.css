@@ -51,7 +51,7 @@ main {
 .loader {
     margin-top: 15em;
     border: 5px solid #f3f3f3; /* Light grey */
-    border-top: 5px solid #3498db; /* Blue */
+    border-top: 5px solid #23BDFC; /* Blue */
     border-radius: 50%;
     width: 100px;
     height: 100px;
@@ -282,5 +282,22 @@ aside.forecast .forecast-items-container{
     margin:0em;
 }
 
+section.error-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    text-align: center;
+    padding-top: 8em;
+
+    color:#23BDFC;
+}
+
+section.error-message h1{
+  font-size: 2.5rem;
+  margin: .25em;
+}
+section.error-message p{
+  margin: .25em;
+}
 

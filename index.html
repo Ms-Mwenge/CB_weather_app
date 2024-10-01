@@ -59,7 +59,7 @@
             <h5 class="country-txt glass-effect">location</h5>
           </div>
 
-          <h5 class="current-date-txt regular-txt glass-effect">date</h5>
+          <h5 class="current-date-txt   glass-effect">date</h5>
           <h5 class="local-time glass-effect">time</h5>
         </div>
 
@@ -74,8 +74,8 @@
             <h1 class="temp-txt">29 °C</h1>
            
             <div class="weather-summary-info">
-              <img src="assets/weather/clouds.svg" class="weather-summary-img" />
-              <h3 class="condition-txt regular-txt">conditions</h3>
+              <img src="assets/weather/cloudy.svg" class="weather-summary-img" />
+              <h3 class="condition-txt  ">conditions</h3>
             </div>
           </div>
 
@@ -86,7 +86,7 @@
             <div class="condition-item">
              
               <div class="condition-info">
-                <p class="regular-txt">Humidity</p>
+                <p class=" ">Humidity</p>
                 <h5 class="humidity-value-txt">55%</h5>
               </div>
             </div>
@@ -95,7 +95,7 @@
             <div class="condition-item">
              
               <div class="condition-info">
-                <p class="regular-txt">Wind Speed</p>
+                <p class=" ">Wind Speed</p>
                 <h5 class="wind-value-txt">2 mph</h5>
               </div>
             </div>
@@ -119,18 +119,16 @@
           <div class="loader"></div>
         </div>
       </section>
-
-      <!-- City not found message -->
-
-  
     </main>
-    <section class="not-found section-message" style="display: none">
-      <img src="assets/message/not-found.png" />
+
+    <!-- Error message  -->
+    <section class="error-message not-found" style="display: none">
+      <img class="error-message-img" src="assets/message/search_not_found.png" width="250px" />
       <div>
-        <h1>Not Found</h1>
-        <h4 class="regular-txt">
+        <h1 class="error-message-title">Not Found</h1>
+        <p class="error-message-txt">
           Sorry, we couldn't find the city you're searching for.
-        </h4>
+        </p>
       </div>
     </section>
 

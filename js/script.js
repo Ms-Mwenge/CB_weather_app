@@ -16,6 +16,10 @@ const localTimeElement = document.querySelector(".local-time");
 const greetingElement = document.querySelector(".greeting-txt");
 const mainTag = document.querySelector("main");
 
+const errMessageTitle = document.querySelector(".error-message-title");
+const errMessageTxt = document.querySelector(".error-message-txt");
+const errMessageImg = document.querySelector(".error-message-img");
+
 const forecastItemsContainer = document.querySelector(
   ".forecast-items-container"
 );
@@ -30,9 +34,9 @@ function initialize() {
   updateWeatherInfo(provincialHQ);
 }
 
-window.onload = initialize;
+window.onload = initialize; // Assigning function to window.onload properly
 
-// Event Lister for search button and search input
+// Event Listener for search button and search input
 searchBtn.addEventListener("click", () => {
   if (cityInput.value.trim() != "") {
     updateWeatherInfo(cityInput.value);
@@ -48,27 +52,80 @@ cityInput.addEventListener("keydown", event => {
   }
 });
 
-// Fetch API to get data from openWeatherAPI
+// Fetch API to get data from OpenWeatherAPI
 async function getFetchData(endPoint, city) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/${endPoint}?q=${city}&appid=${apiKey}&units=metric`;
 
-  const response = await fetch(apiUrl);
-  return response.json();
+  try {
+    const response = await fetch(apiUrl);
+
+    // Check if the response was successful
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    // Handle network errors
+    if (
+      error.name === "TypeError" &&
+      error.message.includes("Failed to fetch")
+    ) {
+      showDisplaySection(notFoundSection);
+      mainTag.style.display = "none";
+
+      console.error("Network error:", error);
+
+      // set error message
+      errMessageImg.src = `assets/message/network_error.png`;
+      errMessageTitle.textContent = "Network Error";
+      errMessageTxt.textContent = "Please check your internet connection.";
+      return;
+    }
+
+    // Handle API request errors
+    else if (error.message.includes("API request failed")) {
+      showDisplaySection(notFoundSection);
+      mainTag.style.display = "none";
+
+      console.error("API request error:", error);
+
+      // set error message
+      errMessageTitle.textContent = "Not  Found";
+      errMessageTxt.textContent = "sorry...We couldn't find your search";
+      return;
+    }
+
+    // Handle other errors
+    else {
+      showDisplaySection(notFoundSection);
+      mainTag.style.display = "none";
+
+      console.error("Unknown error:", error);
+
+      // set error message
+      errMessageImg.src = `assets/message/unknown_error.png`;
+      errMessageTitle.textContent = "Something Went Wrong";
+      errMessageTxt.textContent =
+        "An unknown error occurred. Please try again later..";
+      return;
+    }
+  }
 }
 
-// get weather icon based on weather condition
-function getWeaatherIcon(id) {
+// Get weather icon based on weather condition
+function getWeatherIcon(id) {
   if (id <= 232) return "thunderstorm.svg";
   if (id <= 321) return "drizzle.svg";
   if (id <= 531) return "rain.svg";
   if (id <= 622) return "snow.svg";
   if (id <= 781) return "atmosphere.svg";
   if (id <= 800) return "clear.svg";
-  else return "cloudy.svg";
+  return "cloudy.svg";
 }
 
-// get current  date
-
+// Get current date
 function getCurrentDate() {
   const currentDate = new Date();
   const options = {
@@ -80,7 +137,7 @@ function getCurrentDate() {
   return currentDate.toLocaleDateString("en-GB", options);
 }
 
-// get time
+// Get time
 function getLocalTime() {
   const currentTime = new Date();
   const options = {
@@ -98,13 +155,14 @@ function updateLocalTime() {
 }
 
 updateLocalTime();
+
 const currentTime = new Date();
 const hour = currentTime.getHours();
 const greeting =
   hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
 greetingElement.textContent = greeting;
 
-// Update fetched weather information for veiwing
+// Update fetched weather information for viewing
 async function updateWeatherInfo(city) {
   // Show loader before fetching data
   showLoader();
@@ -114,17 +172,17 @@ async function updateWeatherInfo(city) {
   // Hide loader after data is fetched
   hideLoader();
 
-  //show not found message
+  // Show not found message
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
     mainTag.style.display = "none";
     return;
   }
 
-  //   set main back to view
+  // Set main back to view
   mainTag.style.display = "block";
 
-  // get weather data
+  // Get weather data
   const {
     name: country,
     main: { temp, humidity },
@@ -141,16 +199,16 @@ async function updateWeatherInfo(city) {
   windValueTxt.textContent = speed + " mph";
 
   currentDateTxt.textContent = getCurrentDate();
-  weatherSummaryImg.src = `assets/weather/${getWeaatherIcon(id)}`;
+  weatherSummaryImg.src = `assets/weather/${getWeatherIcon(id)}`;
 
   await updateForecastsInfo(city);
 
-  console.log(weatherData); //console log data for debugging
+  console.log(weatherData); // Console log data for debugging
 
   showDisplaySection(weatherInfoSection);
 }
 
-// get 5-days  weather forecast data
+// Get 5-days weather forecast data
 async function updateForecastsInfo(city) {
   const forecastsData = await getFetchData("forecast", city);
 
@@ -169,7 +227,6 @@ async function updateForecastsInfo(city) {
 }
 
 // Update weather forecast
-
 function updateForecastItems(weatherData) {
   const {
     dt_txt: date,
@@ -187,7 +244,7 @@ function updateForecastItems(weatherData) {
   const forecastItem = `
           <div class="forecast-item glass-effect">
               <h5 class="forecast-item-date regular-txt">${dateResult}</h5>
-              <img src="assets/weather/${getWeaatherIcon(
+              <img src="assets/weather/${getWeatherIcon(
                 id
               )}" class="forecast-item-img">
               <h5 class="forecast-item-temp">${Math.round(temp)}°C</h5>
@@ -198,16 +255,16 @@ function updateForecastItems(weatherData) {
   forecastItemsContainer.insertAdjacentHTML("beforeend", forecastItem);
 }
 
-// display weather information
+// Display weather information
 function showDisplaySection(section) {
   [weatherInfoSection, notFoundSection].forEach(
-    section => (section.style.display = "none")
+    sec => (sec.style.display = "none")
   );
 
   section.style.display = "block";
 }
 
-// functions to show and hide the loader
+// Functions to show and hide the loader
 function showLoader() {
   loaderElement.style.display = "block";
 }
