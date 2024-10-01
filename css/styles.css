@@ -84,15 +84,15 @@ nav div.logo form div.input-group input::placeholder{
 }
 
 
-nav div.c-city h3{
+nav div.data-source h3{
     font-weight: 300;
     margin-right: 1em;
 
 }
-nav div.c-city h3 span{
+nav div.data-source h3 span{
     font-weight: 600;
 }
-nav div.c-city img{
+nav div.data-source img{
     width: 30px;
     cursor: pointer;
 }

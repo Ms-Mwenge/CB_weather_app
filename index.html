@@ -4,157 +4,135 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/styles.css" />
+    <!-- Google Icons -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
     <title>CB Weather App</title>
   </head>
   <body>
-    <!-- Navigation -->
-    <nav>
-      <div class="logo">
-        <a href="#">
-          <img
-            class="logo"
-            src="assets/images/Logo-plain.png"
-            alt="The main logo"
-            width="150px"
-        /></a>
+    <header>
+      <!-- Navigation -->
+      <nav>
+        <div class="logo">
+          <a href="#">
+            <img
+              class="logo"
+              src="assets/images/Logo-plain.png"
+              alt="The main logo"
+              width="150px"
+          /></a>
 
-        <form action="">
-          <div class="input-group">
-            <img src="assets/icons/search.svg" alt="search" />
-            <input type="search" placeholder="Search City" />
-          </div>
-        </form>
-      </div>
+          <form action="">
+            <div class="input-group">
+              <img
+                src="assets/icons/search.svg"
+                alt="search"
+                title="Search"
+                class="search-btn"
+              />
+              <input
+                type="search"
+                placeholder="Search City"
+                class="city-input"
+              />
+            </div>
+          </form>
+        </div>
 
-      <div class="c-city">
-        <h3>Current City: <span id="city">Ndola</span></h3>
-        <img src="assets/icons/info.svg" alt="" width="50px" />
-      </div>
-    </nav>
+        <div class="data-source">
+          <a href="https://openweathermap.org" target="_blank">
+            <img src="assets/icons/info.svg" alt="" width="50px"
+          /></a>
+        </div>
+      </nav>
+    </header>
 
     <!-- Main  -->
     <main>
-      <section>
-        <!-- Todays Weather -->
-        <aside>
-          <div>
-            <!-- temperature -->
-            <h2>30<sup>o</sup></h2>
-            <div>
-              <!-- humidity level -->
-              <div>
-                <img src="assets/icons/humidity.svg" alt="Humidity levels" />
-                <p>78%</p>
-              </div>
+      <section class="weather-info" style="display: none">
+        <!-- date and location -->
+        <div class="location-date-container">
+          <div class="location">
+            <span class="material-symbols-outlined"> location_on </span>
+            <h4 class="country-txt">Zambia</h4>
+          </div>
+          <h5 class="current-date-txt regular-txt">Mon, 30 Sep</h5>
+          <div class="greeting-container">
+            <p class="greeting">Good Morning</p>
+          </div>
+        </div>
 
-              <!-- Wind speed -->
-              <div>
-                <img src="assets/icons/wind.svg" alt="Wind speed" />
-                <p>6.2 mph</p>
-              </div>
+        <!-- Todays weather -->
+        <aside>
+          <!-- Temperature -->
+          <div class="weather-summary-container">
+            <img src="assets/weather/clouds.svg" class="weather-summary-img" />
+            <div class="weather-summary-info">
+              <h1 class="temp-txt">29 °C</h1>
+              <h3 class="condition-txt regular-txt">Clouds</h3>
             </div>
           </div>
 
-          <!-- current weather condition -->
-          <div>
-            <img src="assets/icons/sunny.svg" alt="sunny" />
-            <h3>Sunny</h3>
+          <!-- Weather conditions -->
+
+          <div class="weather-conditions-container">
+            <!-- Humidity level -->
+            <div class="condition-item">
+              <span class="material-symbols-outlined"> water_drop </span>
+              <div class="condition-info">
+                <h5 class="regular-txt">Humidity</h5>
+                <h5 class="humidity-value-txt">55%</h5>
+              </div>
+            </div>
+
+            <!-- Wind Level -->
+            <div class="condition-item">
+              <span class="material-symbols-outlined"> air </span>
+              <div class="condition-info">
+                <h5 class="regular-txt">Wind Speed</h5>
+                <h5 class="wind-value-txt">2 mph</h5>
+              </div>
+            </div>
           </div>
         </aside>
 
-        <!-- Weather focast section -->
+        <!-- Weaather forecast -->
         <aside>
-          <!-- Day 1 -->
-          <div>
-            <h3>Today</h3>
-            <h2>30<sup>o</sup></h2>
-            <p>Sunny</p>
-            <img src="assets/icons/sunny.svg" alt="sunny" />
-          </div>
-
-          <!--Day 2-->
-          <div>
-            <h3>SUN</h3>
-            <h2>20<sup>o</sup></h2>
-            <p>Partly Cloudy</p>
-            <img src="assets/icons/Partly_cloudy.svg" alt="partly cloudy" />
-          </div>
-
-          <!-- Day 3 -->
-          <div>
-            <h3>Day</h3>
-            <h2>05<sup>o</sup></h2>
-            <p>Rainy</p>
-            <img src="assets/icons/rainy.svg" alt="rainy" />
-          </div>
-
-          <!-- Day 4 -->
-          <div>
-            <h3>Day</h3>
-            <h2>30<sup>o</sup></h2>
-            <p>Sunny</p>
-            <img src="assets/icons/sunny.svg" alt="sunny" />
-          </div>
-
-          <!-- Day 5 -->
-          <div>
-            <h3>Day</h3>
-            <h2>17<sup>o</sup></h2>
-            <p>Windy</p>
-            <img src="assets/icons/windy.svg" alt="" />
+          <div class="forecast-items-container">
+            <!-- weather forecast for 5 days -->
           </div>
         </aside>
       </section>
 
-      <!-- Detailed Side pane for today's weather -->
-      <section>
-        <aside class="top">
-          <!-- greetings -->
-          <p>Good Morning</p>
+      <!-- section message -->
 
-          <!-- Time -->
-          <h2>11: 00 AM</h2>
+      <section class="search-city section-message">
+        <div>
+          <h1>Search City</h1>
+          <h4 class="regular-txt">
+            Start by typing your city of preference in the search bar and find
+            out the weather conditions of the city.
+          </h4>
+        </div>
+      </section>
 
-          <!-- Date -->
-          <h3>Saturday</h3>
-          <p>Sep 9, 2024</p>
+      <!-- City not found message -->
 
-          <!-- location -->
-          <p>Ndola</p>
-        </aside>
-
-        <aside class="weather-details">
-          <!-- Humidity -->
-          <div>
-            <p>humidity</p>
-            <div>
-              <p>78%</p>
-              <img src="assets/icons/humidity.svg" alt="humidity levels" />
-            </div>
-          </div>
-
-          <!-- Wind Speed-->
-          <div>
-            <p>Wind Speed</p>
-            <div>
-              <p>6.2 mph</p>
-              <img src="assets/icons/wind.svg" alt="" />
-            </div>
-          </div>
-
-          <!-- Temperature-->
-          <div>
-            <p>Wind Speed</p>
-            <div>
-              <p>30</p>
-              <img src="assets/icons/temp.svg" alt="temperature" />
-            </div>
-          </div>
-        </aside>
-
-        <!-- Weather Data Source Credit -->
-        <p>Source: OpenWeatherMap API</p>
+      <section class="not-found section-message" style="display: none">
+        <img src="assets/message/not-found.png" />
+        <div>
+          <h1>Not Found</h1>
+          <h4 class="regular-txt">
+            Sorry, we couldn't find the city you're searching for.
+          </h4>
+        </div>
       </section>
     </main>
+
+    <!-- script -->
+    <script src="js/script.js" defer></script>
   </body>
 </html>
