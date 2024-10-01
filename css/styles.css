@@ -2,7 +2,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* General Rules */
+main {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    background-size: cover;
+    background-position: center;
+    color: white;
+  }
+  
+  main::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+    display: none; 
+  }
+  
+  main.dimmed-bg::before {
+    display: block; /
+  }
+  
+  main * {
+    position: relative;
+    z-index: 2; 
+  }
+  
 
+.glass-effect {
+    background: rgba(35, 189, 252, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.17);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: .25em .5em;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
 .loader-container{
     display: flex;
     justify-content: center;
@@ -29,7 +68,7 @@
 body{
     font-family: 'Montserrat', sans-serif;
     margin: 0;   
-    color:#23BDFC;
+    background-color: rgb(232, 249, 255);
 }
 
 nav{
@@ -73,7 +112,7 @@ nav div.logo form div.input-group img{
     margin-right: 1em;
     margin-top: .15em;
     margin-bottom: .15em;
-
+    cursor: pointer;
     width: 30px;
 
 }
@@ -119,3 +158,129 @@ nav div.data-source img{
     width: 30px;
     cursor: pointer;
 }
+
+/* main app styling */
+
+section.weather-info div.location-date-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+section.weather-info div.location-date-container div.location{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 1em;
+    color:#F9C900;
+}
+.local-time{
+    text-transform: uppercase;
+    margin-left: 1em;
+}
+
+section.weather-info div.greeting-container{
+    text-align: center;
+    padding: 0em;
+
+
+}
+section.weather-info div.greeting-container p{
+    text-align: center;
+    margin: 0em;
+
+}
+
+
+section.weather-info aside.today-weather div.weather-summary-container h1{
+    text-align: center;
+    margin-top: .2em;
+    margin-bottom:0em;
+    font-size: 9.5rem;
+    letter-spacing: .01rem;
+}
+div.weather-summary-info{
+    display: flex;
+    margin:0em;
+    align-items: center;
+    justify-content: center;
+}
+div.weather-summary-info img{
+    width:60px
+}
+div.weather-summary-info h3{
+    font-weight: 300;
+}
+
+div.weather-conditions-container{
+    margin-top: 1em;
+  
+    display: flex;
+    justify-content: center;
+    padding: 0em 1em;
+}
+div.weather-conditions-container div.condition-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+div.condition-info p{
+    margin: 0em;
+    font-size: .85rem;
+}
+div.condition-info h5{
+    margin: 0em;
+    font-size: 1.5rem;
+    
+}
+div.condition-info{
+    margin: 0em 2em;
+    
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #ADD8E6;
+    width: 50vw;
+}
+
+aside.forecast{
+    margin-top: 1.5em;
+}
+aside.forecast h4{
+    font-weight: 400;
+    text-align: center;
+    margin: 0em;
+}
+
+aside.forecast .forecast-items-container{
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+}
+
+.forecast-item{
+    border: 2px solid #23BDFC;
+    text-align: center;
+    border-radius: 1em;
+    width: 8em;
+    padding: .25em;
+}
+.forecast-item .forecast-item-img{
+    width: 60px;
+}
+.forecast-item h5{
+    margin:0em;
+}
+.forecast-item p{
+    margin:0em;
+}
+
+
+

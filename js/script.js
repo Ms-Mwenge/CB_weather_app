@@ -12,6 +12,9 @@ const humidityValueTxt = document.querySelector(".humidity-value-txt");
 const windValueTxt = document.querySelector(".wind-value-txt");
 const weatherSummaryImg = document.querySelector(".weather-summary-img");
 const currentDateTxt = document.querySelector(".current-date-txt");
+const localTimeElement = document.querySelector(".local-time");
+const greetingElement = document.querySelector(".greeting-txt");
+const mainTag = document.querySelector("main");
 
 const forecastItemsContainer = document.querySelector(
   ".forecast-items-container"
@@ -61,7 +64,7 @@ function getWeaatherIcon(id) {
   if (id <= 622) return "snow.svg";
   if (id <= 781) return "atmosphere.svg";
   if (id <= 800) return "clear.svg";
-  else return "clouds.svg";
+  else return "cloudy.svg";
 }
 
 // get current  date
@@ -77,6 +80,30 @@ function getCurrentDate() {
   return currentDate.toLocaleDateString("en-GB", options);
 }
 
+// get time
+function getLocalTime() {
+  const currentTime = new Date();
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  };
+
+  return currentTime.toLocaleTimeString("en-GB", options);
+}
+
+function updateLocalTime() {
+  localTimeElement.textContent = getLocalTime();
+  setTimeout(updateLocalTime, 1000);
+}
+
+updateLocalTime();
+const currentTime = new Date();
+const hour = currentTime.getHours();
+const greeting =
+  hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+greetingElement.textContent = greeting;
+
 // Update fetched weather information for veiwing
 async function updateWeatherInfo(city) {
   // Show loader before fetching data
@@ -90,8 +117,12 @@ async function updateWeatherInfo(city) {
   //show not found message
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
+    mainTag.style.display = "none";
     return;
   }
+
+  //   set main back to view
+  mainTag.style.display = "block";
 
   // get weather data
   const {
@@ -101,8 +132,10 @@ async function updateWeatherInfo(city) {
     wind: { speed }
   } = weatherData;
 
+  updateBackground(main.toLowerCase());
+
   countryTxt.textContent = country;
-  tempTxt.textContent = Math.round(temp) + " °C";
+  tempTxt.textContent = Math.round(temp) + "°C";
   conditionTxt.textContent = main;
   humidityValueTxt.textContent = humidity + "%";
   windValueTxt.textContent = speed + " mph";
@@ -136,10 +169,11 @@ async function updateForecastsInfo(city) {
 }
 
 // Update weather forecast
+
 function updateForecastItems(weatherData) {
   const {
     dt_txt: date,
-    weather: [{ id }],
+    weather: [{ id, main: weatherCondition }],
     main: { temp }
   } = weatherData;
 
@@ -151,14 +185,15 @@ function updateForecastItems(weatherData) {
   const dateResult = dateTaken.toLocaleDateString("en-US", dateOption);
 
   const forecastItem = `
-        <div class="forecast-item">
-            <h5 class="forecast-item-date regular-txt">${dateResult}</h5>
-            <img src="assets/weather/${getWeaatherIcon(
-              id
-            )}" class="forecast-item-img">
-            <h5 class="forecast-item-temp">${Math.round(temp)} °C</h5>
-        </div>
-    `;
+          <div class="forecast-item glass-effect">
+              <h5 class="forecast-item-date regular-txt">${dateResult}</h5>
+              <img src="assets/weather/${getWeaatherIcon(
+                id
+              )}" class="forecast-item-img">
+              <h5 class="forecast-item-temp">${Math.round(temp)}°C</h5>
+              <p class="forecast-item-condition">${weatherCondition}</p>
+          </div>
+      `;
 
   forecastItemsContainer.insertAdjacentHTML("beforeend", forecastItem);
 }
@@ -178,4 +213,23 @@ function showLoader() {
 }
 function hideLoader() {
   loaderElement.style.display = "none";
+}
+
+function updateBackground(weatherCondition) {
+  const weatherConditions = {
+    clear: "sunny.jpg",
+    clouds: "cloudy.jpg",
+    rain: "rainy.jpg",
+    thunderstorm: "rainy.jpg",
+    drizzle: "rainy.jpg",
+    snow: "snow.jpg",
+    atmosphere: "atmosphere.jpg"
+  };
+
+  const backgroundUrl = weatherConditions[weatherCondition] || "default.jpg";
+
+  // Set the background image
+  mainTag.style.backgroundImage = `url('assets/images/${backgroundUrl}')`;
+
+  mainTag.classList.add("dimmed-bg");
 }

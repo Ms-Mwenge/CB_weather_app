@@ -10,7 +10,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
 
-    <title>CB Weather App</title>
+    <title>Copperbelt Weather App</title>
   </head>
   <body>
     <header>
@@ -51,28 +51,31 @@
     </header>
 
     <!-- Main  -->
-    <main>
+    <main class="main">
       <section class="weather-info" style="display: none">
         <!-- date and location -->
         <div class="location-date-container">
           <div class="location">
-            <span class="material-symbols-outlined"> location_on </span>
-            <h4 class="country-txt">Zambia</h4>
+            <h5 class="country-txt glass-effect">location</h5>
           </div>
-          <h5 class="current-date-txt regular-txt">Mon, 30 Sep</h5>
-          <div class="greeting-container">
-            <p class="greeting">Good Morning</p>
-          </div>
+
+          <h5 class="current-date-txt regular-txt glass-effect">date</h5>
+          <h5 class="local-time glass-effect">time</h5>
+        </div>
+
+        <div class="greeting-container">
+          <p class="greeting-txt">Good Morning</p>
         </div>
 
         <!-- Todays weather -->
-        <aside>
+        <aside class="today-weather">
           <!-- Temperature -->
           <div class="weather-summary-container">
-            <img src="assets/weather/clouds.svg" class="weather-summary-img" />
+            <h1 class="temp-txt">29 °C</h1>
+           
             <div class="weather-summary-info">
-              <h1 class="temp-txt">29 °C</h1>
-              <h3 class="condition-txt regular-txt">Clouds</h3>
+              <img src="assets/weather/clouds.svg" class="weather-summary-img" />
+              <h3 class="condition-txt regular-txt">conditions</h3>
             </div>
           </div>
 
@@ -81,26 +84,28 @@
           <div class="weather-conditions-container">
             <!-- Humidity level -->
             <div class="condition-item">
-              <span class="material-symbols-outlined"> water_drop </span>
+             
               <div class="condition-info">
-                <h5 class="regular-txt">Humidity</h5>
+                <p class="regular-txt">Humidity</p>
                 <h5 class="humidity-value-txt">55%</h5>
               </div>
             </div>
-
+            <div</div>
             <!-- Wind Level -->
             <div class="condition-item">
-              <span class="material-symbols-outlined"> air </span>
+             
               <div class="condition-info">
-                <h5 class="regular-txt">Wind Speed</h5>
+                <p class="regular-txt">Wind Speed</p>
                 <h5 class="wind-value-txt">2 mph</h5>
               </div>
             </div>
           </div>
+          <hr>
         </aside>
 
         <!-- Weaather forecast -->
-        <aside>
+        <aside class="forecast">
+          <h4>Next 5 Days Forecast </h4>
           <div class="forecast-items-container">
             <!-- weather forecast for 5 days -->
           </div>
@@ -117,16 +122,17 @@
 
       <!-- City not found message -->
 
-      <section class="not-found section-message" style="display: none">
-        <img src="assets/message/not-found.png" />
-        <div>
-          <h1>Not Found</h1>
-          <h4 class="regular-txt">
-            Sorry, we couldn't find the city you're searching for.
-          </h4>
-        </div>
-      </section>
+  
     </main>
+    <section class="not-found section-message" style="display: none">
+      <img src="assets/message/not-found.png" />
+      <div>
+        <h1>Not Found</h1>
+        <h4 class="regular-txt">
+          Sorry, we couldn't find the city you're searching for.
+        </h4>
+      </div>
+    </section>
 
     <!-- script -->
     <script src="js/script.js" defer></script>
