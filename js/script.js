@@ -4,7 +4,6 @@ const searchBtn = document.querySelector(".search-btn");
 
 const weatherInfoSection = document.querySelector(".weather-info");
 const notFoundSection = document.querySelector(".not-found");
-const searchCitySection = document.querySelector(".search-city");
 
 const countryTxt = document.querySelector(".country-txt");
 const tempTxt = document.querySelector(".temp-txt");
@@ -21,6 +20,14 @@ const forecastItemsContainer = document.querySelector(
 // OpenWeatherAPI Key
 const apiKey = "72072ab5f875ae67618e0d33db966268";
 
+// on load, show weather for provincial headquarters
+function initialize() {
+  // setting current city to provincial headquarters
+  const provincialHQ = "ndola";
+  updateWeatherInfo(provincialHQ);
+}
+
+window.onload = initialize;
 
 // Event Lister for search button and search input
 searchBtn.addEventListener("click", () => {
@@ -37,7 +44,6 @@ cityInput.addEventListener("keydown", event => {
     cityInput.blur();
   }
 });
-
 
 // Fetch API to get data from openWeatherAPI
 async function getFetchData(endPoint, city) {
@@ -73,15 +79,21 @@ function getCurrentDate() {
 
 // Update fetched weather information for veiwing
 async function updateWeatherInfo(city) {
+  // Show loader before fetching data
+  showLoader();
+
   const weatherData = await getFetchData("weather", city);
 
-    //show not found message
+  // Hide loader after data is fetched
+  hideLoader();
+
+  //show not found message
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
     return;
   }
 
-    // get weather data
+  // get weather data
   const {
     name: country,
     main: { temp, humidity },
@@ -152,4 +164,18 @@ function updateForecastItems(weatherData) {
 }
 
 // display weather information
+function showDisplaySection(section) {
+  [weatherInfoSection, notFoundSection].forEach(
+    section => (section.style.display = "none")
+  );
 
+  section.style.display = "block";
+}
+
+// functions to show and hide the loader
+function showLoader() {
+  loaderElement.style.display = "block";
+}
+function hideLoader() {
+  loaderElement.style.display = "none";
+}
