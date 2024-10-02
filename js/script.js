@@ -27,14 +27,15 @@ const forecastItemsContainer = document.querySelector(
 // OpenWeatherAPI Key
 const apiKey = "72072ab5f875ae67618e0d33db966268";
 
-// on load, show weather for provincial headquarters
+// on load, show weather for provincial headquarter
 function initialize() {
-  // setting current city to provincial headquarters
+
+  // setting current city to provincial headquarter
   const provincialHQ = "ndola";
   updateWeatherInfo(provincialHQ);
 }
 
-window.onload = initialize; // Assigning function to window.onload properly
+window.onload = initialize; 
 
 // Event Listener for search button and search input
 searchBtn.addEventListener("click", () => {
@@ -67,6 +68,7 @@ async function getFetchData(endPoint, city) {
     const data = await response.json();
     return data;
   } catch (error) {
+    
     // Handle network errors
     if (
       error.name === "TypeError" &&
@@ -137,25 +139,30 @@ function getCurrentDate() {
   return currentDate.toLocaleDateString("en-GB", options);
 }
 
-// Get time
-function getLocalTime() {
-  const currentTime = new Date();
+// Get time adjusted for the searched city's timezone
+function getLocalTime(timezoneOffset) {
+  // Get current time in UTC (milliseconds) and adjust for timezone offset (in seconds)
+  const utcTime = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
+  const localTime = new Date(utcTime + timezoneOffset * 1000);
+
+  // Format the local time
   const options = {
     hour: "2-digit",
     minute: "2-digit",
     hour12: true
   };
 
-  return currentTime.toLocaleTimeString("en-GB", options);
+  return localTime.toLocaleTimeString("en-GB", options);
 }
 
-function updateLocalTime() {
-  localTimeElement.textContent = getLocalTime();
-  setTimeout(updateLocalTime, 1000);
+// Update the time for the searched city's timezone
+function updateLocalTime(timezoneOffset) {
+  localTimeElement.textContent = getLocalTime(timezoneOffset);
+
+  setTimeout(() => updateLocalTime(timezoneOffset), 100000);
 }
 
-updateLocalTime();
-
+// greeting text display based on  time of day
 const currentTime = new Date();
 const hour = currentTime.getHours();
 const greeting =
@@ -191,6 +198,13 @@ async function updateWeatherInfo(city) {
   } = weatherData;
 
   updateBackground(main.toLowerCase());
+
+  if (weatherData && weatherData.timezone) {
+    // Update the local time using the city's timezone offset
+    updateLocalTime(weatherData.timezone);
+  } else {
+    console.error("Could not retrieve weather or timezone data.");
+  }
 
   countryTxt.textContent = country;
   tempTxt.textContent = Math.round(temp) + "°C";
@@ -272,6 +286,7 @@ function hideLoader() {
   loaderElement.style.display = "none";
 }
 
+// function to update background
 function updateBackground(weatherCondition) {
   const weatherConditions = {
     clear: "sunny.jpg",
