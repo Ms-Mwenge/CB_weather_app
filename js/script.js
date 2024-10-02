@@ -29,13 +29,12 @@ const apiKey = "72072ab5f875ae67618e0d33db966268";
 
 // on load, show weather for provincial headquarter
 function initialize() {
-
   // setting current city to provincial headquarter
   const provincialHQ = "ndola";
   updateWeatherInfo(provincialHQ);
 }
 
-window.onload = initialize; 
+window.onload = initialize;
 
 // Event Listener for search button and search input
 searchBtn.addEventListener("click", () => {
@@ -68,7 +67,6 @@ async function getFetchData(endPoint, city) {
     const data = await response.json();
     return data;
   } catch (error) {
-    
     // Handle network errors
     if (
       error.name === "TypeError" &&
@@ -139,35 +137,46 @@ function getCurrentDate() {
   return currentDate.toLocaleDateString("en-GB", options);
 }
 
-// Get time adjusted for the searched city's timezone
-function getLocalTime(timezoneOffset) {
-  // Get current time in UTC (milliseconds) and adjust for timezone offset (in seconds)
-  const utcTime = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
-  const localTime = new Date(utcTime + timezoneOffset * 1000);
+// Store the current time of the searched city in milliseconds
+let cityTimeInMs;
 
-  // Format the local time
-  const options = {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true
-  };
-
-  return localTime.toLocaleTimeString("en-GB", options);
-}
-
-// Update the time for the searched city's timezone
+// Function to update local time of the searched city every second
 function updateLocalTime(timezoneOffset) {
-  localTimeElement.textContent = getLocalTime(timezoneOffset);
+  // Get the current UTC time
+  const utcTime = new Date().getTime() + new Date().getTimezoneOffset() * 60000;
 
-  setTimeout(() => updateLocalTime(timezoneOffset), 100000);
+  // Calculate the city's local time using its timezone offset
+  cityTimeInMs = utcTime + timezoneOffset * 1000;
+
+  // Update the local time every second
+  const intervalId = setInterval(() => {
+    cityTimeInMs += 1000;
+
+    const cityTime = new Date(cityTimeInMs);
+    const options = {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    };
+
+    localTimeElement.textContent = cityTime.toLocaleTimeString(
+      "en-GB",
+      options
+    );
+
+    // Update greeting based on the city's time
+    updateGreeting(cityTime.getHours());
+  }, 1000);
+
+  return intervalId;
 }
 
-// greeting text display based on  time of day
-const currentTime = new Date();
-const hour = currentTime.getHours();
-const greeting =
-  hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
-greetingElement.textContent = greeting;
+// Function to update greeting based on the hour of the searched city's local time
+function updateGreeting(hour) {
+  const greeting =
+    hour < 12 ? "Good Morning" : hour < 18 ? "Good Afternoon" : "Good Evening";
+  greetingElement.textContent = greeting;
+}
 
 // Update fetched weather information for viewing
 async function updateWeatherInfo(city) {
@@ -255,6 +264,7 @@ function updateForecastItems(weatherData) {
   };
   const dateResult = dateTaken.toLocaleDateString("en-US", dateOption);
 
+  // render weather forecast
   const forecastItem = `
           <div class="forecast-item glass-effect">
               <h5 class="forecast-item-date regular-txt">${dateResult}</h5>
