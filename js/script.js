@@ -65,7 +65,6 @@ async function getFetchData(endPoint, city) {
     const data = await response.json();
     return data;
   } catch (error) {
-
     // Handle network errors
     if (
       error.name === "TypeError" &&
@@ -98,7 +97,6 @@ async function getFetchData(endPoint, city) {
       return;
     }
 
-
     // Handle other errors
     else {
       showDisplaySection(notFoundSection);
@@ -115,7 +113,6 @@ async function getFetchData(endPoint, city) {
     }
   }
 }
-
 
 // Get weather icon based on weather condition
 function getWeatherIcon(id) {
@@ -295,16 +292,16 @@ function hideLoader() {
 // function to update background
 function updateBackground(weatherCondition) {
   const weatherConditions = {
-    clear: "sunny.jpg",
-    clouds: "cloudy.jpg",
-    rain: "rainy.jpg",
-    thunderstorm: "rainy.jpg",
-    drizzle: "rainy.jpg",
-    snow: "snow.jpg",
-    atmosphere: "atmosphere.jpg"
+    clear: "sunny.webp",
+    clouds: "cloudy.webp",
+    rain: "rainy.webp",
+    thunderstorm: "storm.webp",
+    drizzle: "rainy.webp",
+    snow: "snow.webp",
+    atmosphere: "sunny.webp"
   };
 
-  const backgroundUrl = weatherConditions[weatherCondition] || "default.jpg";
+  const backgroundUrl = weatherConditions[weatherCondition] || "sunny.webp";
 
   // Set the background image
   mainTag.style.backgroundImage = `url('assets/images/${backgroundUrl}')`;
