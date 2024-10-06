@@ -19,6 +19,7 @@ const mainTag = document.querySelector("main");
 const errMessageTitle = document.querySelector(".error-message-title");
 const errMessageTxt = document.querySelector(".error-message-txt");
 const errMessageImg = document.querySelector(".error-message-img");
+const errMessageSection = document.querySelector(".error-message");
 
 const forecastItemsContainer = document.querySelector(
   ".forecast-items-container"
@@ -55,18 +56,16 @@ cityInput.addEventListener("keydown", event => {
 // Fetch API to get data from OpenWeatherAPI
 async function getFetchData(endPoint, city) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/${endPoint}?q=${city}&appid=${apiKey}&units=metric`;
-
   try {
     const response = await fetch(apiUrl);
-
     // Check if the response was successful
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     }
-
     const data = await response.json();
     return data;
   } catch (error) {
+
     // Handle network errors
     if (
       error.name === "TypeError" &&
@@ -80,7 +79,8 @@ async function getFetchData(endPoint, city) {
       // set error message
       errMessageImg.src = `assets/message/network_error.png`;
       errMessageTitle.textContent = "Network Error";
-      errMessageTxt.textContent = "Please check your internet connection.";
+      errMessageTxt.textContent =
+        "Please check your internet connection and try again.";
       return;
     }
 
@@ -93,9 +93,11 @@ async function getFetchData(endPoint, city) {
 
       // set error message
       errMessageTitle.textContent = "Not  Found";
-      errMessageTxt.textContent = "sorry...We couldn't find your search";
+      errMessageTxt.textContent =
+        "sorry...We couldn't find your search. Please try again.";
       return;
     }
+
 
     // Handle other errors
     else {
@@ -113,6 +115,7 @@ async function getFetchData(endPoint, city) {
     }
   }
 }
+
 
 // Get weather icon based on weather condition
 function getWeatherIcon(id) {
@@ -192,11 +195,9 @@ async function updateWeatherInfo(city) {
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
     mainTag.style.display = "none";
+
     return;
   }
-
-  // Set main back to view
-  mainTag.style.display = "block";
 
   // Get weather data
   const {
@@ -207,7 +208,6 @@ async function updateWeatherInfo(city) {
   } = weatherData;
 
   updateBackground(main.toLowerCase());
-
   if (weatherData && weatherData.timezone) {
     // Update the local time using the city's timezone offset
     updateLocalTime(weatherData.timezone);
@@ -220,14 +220,10 @@ async function updateWeatherInfo(city) {
   conditionTxt.textContent = main;
   humidityValueTxt.textContent = humidity + "%";
   windValueTxt.textContent = speed + " mph";
-
   currentDateTxt.textContent = getCurrentDate();
   weatherSummaryImg.src = `assets/weather/${getWeatherIcon(id)}`;
 
   await updateForecastsInfo(city);
-
-  console.log(weatherData); // Console log data for debugging
-
   showDisplaySection(weatherInfoSection);
 }
 

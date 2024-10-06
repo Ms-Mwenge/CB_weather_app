@@ -2,6 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* General Rules */
+a{
+    text-decoration: none;
+    color:#23BDFC;
+}
+a:visited{
+    text-decoration: none;
+    color:#23BDFC;
+}
+a:hover{
+    text-decoration: underline;
+    color:#23BDFC;
+}
 main {
     position: relative;
     width: 100%;
@@ -24,7 +36,7 @@ main {
   }
   
   main.dimmed-bg::before {
-    display: block; /
+    display: block;
   }
   
   main * {
@@ -146,14 +158,15 @@ nav div.logo form div.input-group input::placeholder{
     opacity: 0.35;
 }
 
-
-nav div.data-source h3{
-    font-weight: 300;
-    margin-right: 1em;
-
+nav div.data-source ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0em 2em;
 }
-nav div.data-source h3 span{
-    font-weight: 600;
+nav div.data-source ul>li{
+    list-style: none;
+    margin: 0em .5em;
 }
 nav div.data-source img{
     width: 30px;
@@ -302,6 +315,12 @@ section.error-message p{
   margin: .25em;
 }
 
+/* footer styling */
+.copyright{
+    font-size: .85rem;
+    font-weight: 600;
+    text-align: center;
+}
 
 /* mobile responsiveness for phones */
 @media (max-width: 767.98px) {
@@ -309,12 +328,13 @@ section.error-message p{
         margin: 0em;
         padding:1.5em;
         justify-content: flex-start;
+        flex-direction: column-reverse;
    }
    nav div.logo{
         display: block;
     }
    nav div.logo img.logo{
-        margin-right: 2.5em;
+        margin-left: 5em;
         margin-bottom: 1em;
         width: 150px;
     }
@@ -329,7 +349,23 @@ section.error-message p{
     
     }
    .data-source{
-         display: none;
+         align-items: center;
+         width: 100%;
+         margin-bottom: 1.5em;
+         background-color: rgba(35, 189, 252, 0.05);
+         padding: .25em .5em;
+         border-radius: .5em;
+   }
+   .data-source img{
+        margin:0em;
+        width: 1.2em !important;
+   }
+   .data-source ul{
+        margin:0em !important;
+        padding:0em !important;
+        justify-content: flex-start;
+        font-size: .75rem;
+        font-weight: 600;
    }
 
    section.weather-info aside.today-weather div.weather-summary-container h1{
@@ -388,5 +424,9 @@ section.error-message p{
         font-size: .85rem;
     }
     
+    .copyright{
+        font-size: .65rem;
+        padding: 1em;
+    }
   }
   

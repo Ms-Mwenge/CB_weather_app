@@ -14,7 +14,7 @@
     <title>Copperbelt Weather App</title>
   </head>
   <body>
-    <header>
+    <header class="header">
       <!-- Navigation -->
       <nav>
         <div class="logo">
@@ -26,7 +26,7 @@
               width="150px"
           /></a>
 
-          <form action="">
+          <form action="submit">
             <div class="input-group">
               <img
                 src="assets/icons/search.svg"
@@ -44,8 +44,18 @@
         </div>
 
         <div class="data-source">
+          <!-- ICU Zambia and ZRDC Links -->
+          <ul>
+            <li><a href="http://www.icuzambia.net" target="_blank">ICU Zambia</a></li>
+            <li><a href="https://www.zrdc.org" target="_blank">ZRDC</a></li>
+          </ul>
+
+          <!-- open weather documentation link -->
           <a href="https://openweathermap.org" target="_blank">
-            <img src="assets/icons/info.svg" alt="" width="50px"
+            <img
+              src="assets/icons/info.svg"
+              alt="information icon graphic"
+              width="50px"
           /></a>
         </div>
       </nav>
@@ -60,7 +70,7 @@
             <h5 class="country-txt glass-effect">location</h5>
           </div>
 
-          <h5 class="current-date-txt   glass-effect">date</h5>
+          <h5 class="current-date-txt glass-effect">date</h5>
           <h5 class="local-time glass-effect">time</h5>
         </div>
 
@@ -73,10 +83,14 @@
           <!-- Temperature -->
           <div class="weather-summary-container">
             <h1 class="temp-txt">29 °C</h1>
-           
+
             <div class="weather-summary-info">
-              <img src="assets/weather/cloudy.svg" class="weather-summary-img" />
-              <h3 class="condition-txt  ">conditions</h3>
+              <img
+                src="assets/weather/cloudy.svg"
+                class="weather-summary-img"
+                alt="weather icon"
+              />
+              <h3 class="condition-txt">conditions</h3>
             </div>
           </div>
 
@@ -85,28 +99,26 @@
           <div class="weather-conditions-container">
             <!-- Humidity level -->
             <div class="condition-item">
-             
               <div class="condition-info">
                 <p class=" ">Humidity</p>
                 <h5 class="humidity-value-txt">55%</h5>
               </div>
             </div>
-            <div</div>
+
             <!-- Wind Level -->
             <div class="condition-item">
-             
               <div class="condition-info">
                 <p class=" ">Wind Speed</p>
                 <h5 class="wind-value-txt">2 mph</h5>
               </div>
             </div>
           </div>
-          <hr>
+          <hr />
         </aside>
 
         <!-- Weaather forecast -->
         <aside class="forecast">
-          <h4>Next Days Forecast </h4>
+          <h4>Next Days Forecast</h4>
           <div class="forecast-items-container">
             <!-- weather forecast for 5 days -->
           </div>
@@ -124,7 +136,12 @@
 
     <!-- Error message  -->
     <section class="error-message not-found" style="display: none">
-      <img class="error-message-img" src="assets/message/search_not_found.png" width="250px" />
+      <img
+        class="error-message-img"
+        src="assets/message/search_not_found.png"
+        width="250px"
+        alt="search not found"
+      />
       <div>
         <h1 class="error-message-title">Not Found</h1>
         <p class="error-message-txt">
@@ -133,7 +150,18 @@
       </div>
     </section>
 
-    <!-- script -->
+    <footer>
+      <table>
+        <td align="middle">
+          <span class="copyright"
+            >Ward Name. All Rights Reserved. Designed and Maintained By Your
+            Name, SIN: your SIN number
+          </span>
+        </td>
+      </table>
+    </footer>
+
+    <!-- javaScript -->
     <script src="js/script.js" defer></script>
   </body>
 </html>
