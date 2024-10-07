@@ -90,6 +90,7 @@ window.onload = initialize;
 searchBtn.addEventListener("click", () => {
   if (cityInput.value.trim() != "") {
     updateWeatherInfo(cityInput.value);
+    mainTag.style.display = "block";
     cityInput.value = "";
     cityInput.blur();
   }
@@ -112,17 +113,22 @@ async function getFetchData(endPoint, city) {
       throw new Error(`API request failed with status ${response.status}`);
     }
     const data = await response.json();
+
+    mainTag.style.display = "block";
+    footerTag.style.display = "flex";
+    showDisplaySection(weatherInfoSection);
+
     return data;
   } catch (error) {
+    showDisplaySection(notFoundSection);
+    mainTag.style.display = "none";
+    footerTag.style.display = "none";
+
     // Handle network errors
     if (
       error.name === "TypeError" &&
       error.message.includes("Failed to fetch")
     ) {
-      showDisplaySection(notFoundSection);
-      mainTag.style.display = "none";
-      footerTag.style.display = "none";
-
       console.error("Network error:", error);
 
       // set error message
@@ -135,25 +141,17 @@ async function getFetchData(endPoint, city) {
 
     // Handle API request errors
     else if (error.message.includes("API request failed")) {
-      showDisplaySection(notFoundSection);
-      mainTag.style.display = "none";
-      footerTag.style.display = "none";
-
       console.error("API request error:", error);
 
       // set error message
       errMessageTitle.textContent = "Not  Found";
       errMessageTxt.textContent =
-        "sorry...We couldn't find your search. Please try again.";
+        "We couldn't find your search. Please try again.";
       return;
     }
 
     // Handle other errors
     else {
-      showDisplaySection(notFoundSection);
-      mainTag.style.display = "none";
-      footerTag.style.display = "none";
-
       console.error("Unknown error:", error);
 
       // set error message
@@ -276,6 +274,7 @@ async function updateWeatherInfo(city) {
   await updateForecastsInfo(city);
   showDisplaySection(weatherInfoSection);
 }
+mainTag.style.display = "block";
 
 // Get 5-days weather forecast data
 async function updateForecastsInfo(city) {
