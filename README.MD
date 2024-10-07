@@ -1,6 +1,6 @@
 # Copperbelt Dynamic Weather Web Application
 
-This Weather Web App allows users to search for current weather conditions and a 5-day forecast for any city. The app fetches real-time weather data from the OpenWeatherAPI, providing details such as temperature, humidity, wind speed, and general weather conditions. The background dynamically updates based on the weather type (e.g., sunny, cloudy, rainy), providing a visually engaging experience.
+This Weather Web App allows users to search for current weather conditions and a 5-day forecast for any city/town on the copperbelt. The app fetches real-time weather data from the OpenWeatherAPI, providing details such as temperature, humidity, wind speed, and general weather conditions. The background dynamically updates based on the weather type (e.g., sunny, cloudy, rainy), providing a visually engaging experience.
 
 ## Features
 
