@@ -28,11 +28,60 @@ const forecastItemsContainer = document.querySelector(
 // OpenWeatherAPI Key
 const apiKey = "72072ab5f875ae67618e0d33db966268";
 
-// on load, show weather for provincial headquarter
+// on load, show weather for current city
 function initialize() {
-  // setting current city to provincial headquarter
-  const provincialHQ = "ndola";
-  updateWeatherInfo(provincialHQ);
+  // get current location from geolocation API
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+
+        const cityName = await getCityName(latitude, longitude);
+        console.log(`User is located in: ${cityName}`);
+
+        // pass the city name to get weather
+        updateWeatherInfo(cityName);
+      },
+      error => {
+        console.error(`Error getting location: ${error.message}`);
+        alert(
+          "Location access denied. Please enable location services in your device settings."
+        );
+
+        // fall back to provincial HQ
+        const cityName = "Ndola";
+        updateWeatherInfo(cityName);
+      }
+    );
+  } else {
+    console.error("Geolocation is not supported by this browser.");
+    alert("Geolocation is not supported by your browser.");
+
+    // fall back to provincial HQ
+    const cityName = "Ndola";
+    updateWeatherInfo(cityName);
+  }
+
+  // get city name
+  async function getCityName(latitude, longitude) {
+    const reverseGeocodeUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+
+    try {
+      const response = await fetch(reverseGeocodeUrl);
+      if (!response.ok) {
+        throw new Error(`Error fetching location: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      const cityName = data.name;
+
+      return cityName;
+    } catch (error) {
+      console.error("Error:", error);
+      return null;
+    }
+  }
 }
 
 window.onload = initialize;
