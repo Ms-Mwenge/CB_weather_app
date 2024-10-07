@@ -15,6 +15,7 @@ const currentDateTxt = document.querySelector(".current-date-txt");
 const localTimeElement = document.querySelector(".local-time");
 const greetingElement = document.querySelector(".greeting-txt");
 const mainTag = document.querySelector("main");
+const footerTag = document.querySelector("footer");
 
 const errMessageTitle = document.querySelector(".error-message-title");
 const errMessageTxt = document.querySelector(".error-message-txt");
@@ -38,7 +39,6 @@ function initialize() {
         const longitude = position.coords.longitude;
 
         const cityName = await getCityName(latitude, longitude);
-        console.log(`User is located in: ${cityName}`);
 
         // pass the city name to get weather
         updateWeatherInfo(cityName);
@@ -121,6 +121,7 @@ async function getFetchData(endPoint, city) {
     ) {
       showDisplaySection(notFoundSection);
       mainTag.style.display = "none";
+      footerTag.style.display = "none";
 
       console.error("Network error:", error);
 
@@ -136,6 +137,7 @@ async function getFetchData(endPoint, city) {
     else if (error.message.includes("API request failed")) {
       showDisplaySection(notFoundSection);
       mainTag.style.display = "none";
+      footerTag.style.display = "none";
 
       console.error("API request error:", error);
 
@@ -150,6 +152,7 @@ async function getFetchData(endPoint, city) {
     else {
       showDisplaySection(notFoundSection);
       mainTag.style.display = "none";
+      footerTag.style.display = "none";
 
       console.error("Unknown error:", error);
 
@@ -241,6 +244,7 @@ async function updateWeatherInfo(city) {
   if (weatherData.cod != 200) {
     showDisplaySection(notFoundSection);
     mainTag.style.display = "none";
+    footerTag.style.display = "none";
 
     return;
   }

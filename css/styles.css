@@ -320,10 +320,17 @@ section.error-message p{
     font-size: .85rem;
     font-weight: 600;
     text-align: center;
+
+}
+
+footer{
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 /* mobile responsiveness for phones */
-@media (max-width: 767.98px) {
+@media (max-width: 767px) {
    nav{
         margin: 0em;
         padding:1.5em;
@@ -423,10 +430,59 @@ section.error-message p{
         margin:0em;
         font-size: .85rem;
     }
+    section.error-message{
+        padding: 1em;
+    }
     
     .copyright{
         font-size: .65rem;
         padding: 1em;
     }
+
+    footer{
+        padding: 1em;
+    }
   }
   
+  /* media query for tablet screens */
+
+  @media only screen and (min-width: 767px) and (max-width: 998px){
+    nav{
+        padding: 1.5em;
+
+    }
+
+    nav div.logo form div.input-group{
+        border: solid 2px #23BDFC;
+        border-radius: 2.5em;
+        padding: .25em;
+        width: 16em;
+    
+        justify-content: flex-start;
+    
+    
+    }
+    .data-source ul{
+        margin:0em !important;
+        padding:0em !important;
+        justify-content: flex-start;
+        font-size: .75rem;
+        font-weight: 600;
+   }
+  }
+
+  @media only screen and (min-width: 998px) and (max-width: 1024px){
+    section.weather-info aside.today-weather div.weather-summary-container h1{
+        text-align: center;
+        margin-top: .2em;
+        margin-bottom:0em;
+        font-size: 5.5rem;
+        letter-spacing: .01rem;
+    }
+    aside.forecast{
+        margin-bottom: 60em;
+    }
+    footer{
+        padding: 1em;
+    }
+  }
