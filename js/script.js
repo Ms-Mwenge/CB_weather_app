@@ -114,12 +114,14 @@ async function getFetchData(endPoint, city) {
     }
     const data = await response.json();
 
+    // toggle weather data display
     mainTag.style.display = "block";
     footerTag.style.display = "flex";
     showDisplaySection(weatherInfoSection);
 
     return data;
   } catch (error) {
+    
     showDisplaySection(notFoundSection);
     mainTag.style.display = "none";
     footerTag.style.display = "none";
